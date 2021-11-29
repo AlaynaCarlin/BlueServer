@@ -1,0 +1,2 @@
+node_modules/
+# this prevents the node modules folder from being pushed up to GitHub

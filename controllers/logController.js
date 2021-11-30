@@ -1,4 +1,4 @@
-const Express = require('express');
+const Express = require("express");
 const router = Express.Router();
 // const { where } = require('sequelize/location');
 const { LogModel } = require('../models');
@@ -12,34 +12,6 @@ const { LogModel } = require('../models');
 router.post("/register", async (req, res) => {
 
     let { what, where, calories, category, date, photo, feeling } = req.body.log;
-
-    try {
-        const NewLog = await Log.create({
-            what,
-            where,
-            calories,
-            category,
-            date,
-            photo,
-            feeling
-        });
-
-        res.status(201).json({
-            message: "Log successfully created",
-            user: NewLog
-        })
-    } catch (err) {
-        if (err instanceof UniqueConstraintError) {
-            res.status(409).json({
-                message: "Food already listed. Try Updating instead.",
-            });
-        } else {
-            res.status(500).json({
-                message: "Unable to Log Meal",
-            });
-        }
-    }
-});
 
 // Ben - Update
 router.put("/update/:id", async (req, res) => {
@@ -70,16 +42,11 @@ router.put("/update/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err });
     }
+
 });
 
 //* DELETE ***
 
-
 //* GET ***
 
-
-
 module.exports = router;
-
-
-

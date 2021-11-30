@@ -12,7 +12,8 @@ router.put("/update/:id", async (req, res) => {
 
     const query = {
         where: {
-            id: id
+            id: id,
+            owner: req.user.id
         }
     };
 
@@ -23,7 +24,7 @@ router.put("/update/:id", async (req, res) => {
         category: mealType,
         date: date,
         photo: photo,
-        feeling: feeling,
+        feelings: feeling,
 
     };
 

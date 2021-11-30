@@ -1,13 +1,18 @@
-let Express = require('express');
+const Express = require('express');
+const router = Express.Router();
 const { where } = require('sequelize/location');
-let router = Express.Router();
-let validateJWT = require('../../middleware/validateJWT');
-const { logModel } = require('../../models/log');
+const { LogModel } = require('../models');
 
+//* PRACTICE ***
+router.get('/practice', (req, res) => {
+    res.send('Hey, This is the practice route!!')
+});
+
+//* POST ***
+
+
+//* UPDATE ***
 // Update Code from Ben
-//* POST/ create *
-
-//* UPDATE
 router.put("/update/:id", async (req, res) => {
     const {updatedLog} = req.body.log;
     const id = req.params.id;
@@ -38,8 +43,26 @@ router.put("/update/:id", async (req, res) => {
     }
 });
 
-//* DELETE **
+//* DELETE ***
 
-//* GET **
 
-modules.export = router; 
+//* GET ***
+router.get("/mine/:date", async (req, res) => {
+    const { date } = req.params;
+    try {
+        const results = await LogModel.findAll({
+            where: { date: date }
+        });
+        res.status(200).json(results);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
+
+
+
+
+module.exports = router;
+
+
+

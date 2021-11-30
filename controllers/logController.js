@@ -1,5 +1,5 @@
 let Express = require('express');
-const { where } = require('sequelize/dist');
+const { where } = require('sequelize/location');
 let router = Express.Router();
 let validateJWT = require('../../middleware/validateJWT');
 const { logModel } = require('../../models/log');

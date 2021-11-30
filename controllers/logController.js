@@ -1,11 +1,18 @@
-let Express = require('express');
+const Express = require('express');
+const router = Express.Router();
 const { where } = require('sequelize/location');
-let router = Express.Router();
-let validateJWT = require('../../middleware/validateJWT');
-const { logModel } = require('../../models/log');
+const { LogModel } = require('../models');
 
+//* PRACTICE ***
+router.get('/practice', (req, res) => {
+    res.send('Hey, This is the practice route!!')
+});
+
+//* POST ***
+
+
+//* UPDATE ***
 // Update Code from Ben
-
 router.put("/update/:id", async (req, res) => {
     const {updatedLog} = req.body.log;
     const id = req.params.id;
@@ -36,4 +43,14 @@ router.put("/update/:id", async (req, res) => {
     }
 });
 
-modules.export = router; 
+//* DELETE ***
+
+
+//* GET ***
+
+
+
+module.exports = router;
+
+
+

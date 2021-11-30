@@ -4,8 +4,21 @@ let router = Express.Router();
 let validateJWT = require('../../middleware/validateJWT');
 const { logModel } = require('../../models/log');
 
-// Update Code from Ben
+//* PRACTICE ***
+router.get('/practice', (req, res) => {
+    res.send('Hey, This is the practice route!!')
+});
 
+//* POST ***
+
+//* DELETE ***
+
+//* GET ***
+
+
+
+// Update Code from Ben
+//* UPDATE ***
 router.put("/update/:id", async (req, res) => {
     const {updatedLog} = req.body.log;
     const id = req.params.id;
@@ -37,3 +50,4 @@ router.put("/update/:id", async (req, res) => {
 });
 
 modules.export = router; 
+

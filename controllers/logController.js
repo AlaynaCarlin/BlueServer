@@ -5,7 +5,9 @@ let validateJWT = require('../../middleware/validateJWT');
 const { logModel } = require('../../models/log');
 
 // Update Code from Ben
+//* POST/ create *
 
+//* UPDATE
 router.put("/update/:id", async (req, res) => {
     const {updatedLog} = req.body.log;
     const id = req.params.id;
@@ -35,5 +37,9 @@ router.put("/update/:id", async (req, res) => {
         res.status(500).json({ error: err });
     }
 });
+
+//* DELETE **
+
+//* GET **
 
 modules.export = router; 

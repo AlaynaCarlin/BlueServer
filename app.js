@@ -3,7 +3,6 @@ const app = Express();
 const dbConnection = require("./db");
 const controllers = require('./controllers');
 
-
 app.use(Express.json())
 app.use('/log', controllers.logController);
 app.use('/user', controllers.userController);
@@ -18,4 +17,5 @@ dbConnection.authenticate()
     .catch((err) => {
         console.log(`[Server]: Server crashed. Error = ${err}.`);
     });
+
 

@@ -3,11 +3,9 @@ const app = Express();
 const dbConnection = require("./db");
 const controllers = require('./controllers');
 
-app.use('/test', (req, res) => {
-    res.send('This is a message from the test endpoint on the server!')
-});
-
+app.use(Express.json())
 app.use('/log', controllers.logController);
+app.use('/user', controllers.userController);
 
 dbConnection.authenticate()
     .then(() => dbConnection.sync())
@@ -19,4 +17,5 @@ dbConnection.authenticate()
     .catch((err) => {
         console.log(`[Server]: Server crashed. Error = ${err}.`);
     });
+
 

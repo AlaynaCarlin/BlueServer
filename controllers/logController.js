@@ -1,14 +1,14 @@
-
 const { query } = require('express');
 const Express = require('express');
 const router = Express.Router();
-// const { where } = require('sequelize/location');
-const { LogModel } = require('../models');
+
+let validateJWT = require("../middleware/validate-jwt");
+const { LogModel } = require("../models");
 
 //* PRACTICE ***
-// router.get('/practice', (req, res) => {
-//     res.send('Hey, This is the practice route!!')
-// });
+router.get("/practice", validateJWT, (req, res) => {
+  res.send("Hey, This is the practice route!!");
+});
 
 //* POST ***
 router.post("/create", async (req, res) => {

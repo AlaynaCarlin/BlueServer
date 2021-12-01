@@ -1,10 +1,10 @@
 const Express = require("express");
 const router = Express.Router();
-// const { where } = require("sequelize/location");
+let validateJWT = require("../middleware/validate-jwt");
 const { LogModel } = require("../models");
 
 //* PRACTICE ***
-router.get("/practice", (req, res) => {
+router.get("/practice", validateJWT, (req, res) => {
   res.send("Hey, This is the practice route!!");
 });
 

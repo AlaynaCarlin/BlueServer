@@ -1,3 +1,4 @@
+
 const { query } = require('express');
 const Express = require('express');
 const router = Express.Router();
@@ -5,17 +6,43 @@ const router = Express.Router();
 const { LogModel } = require('../models');
 
 //* PRACTICE ***
-router.get('/practice', (req, res) => {
-    res.send('Hey, This is the practice route!!')
-});
+// router.get('/practice', (req, res) => {
+//     res.send('Hey, This is the practice route!!')
+// });
 
 //* POST ***
+router.post("/create", async (req, res) => {
 
+    let { what, where, calories, category, date, photo, feelings } = req.body.log;
 
-//* UPDATE ***
-// Update Code from Ben
+    try {
+        const NewLog = await LogModel.create({
+            what,
+            where,
+            calories,
+            category,
+            date,
+            photo,
+            feelings
+        });
+
+        res.status(201).json({
+            message: "Log successfully created",
+            message: {NewLog}
+        })
+    } catch (err) {
+            res.status(500).json({
+                message: "Unable to Log Meal",
+                message: {err}
+            });
+        }
+    }
+);
+
+// Ben - Update
 router.put("/update/:id", async (req, res) => {
-    const { updatedLog } = req.body.log;
+
+    const {food, location, calorieNumber, mealType, date, photo, feeling} = req.body.log;
     const id = req.params.id;
 
     const query = {
@@ -24,8 +51,8 @@ router.put("/update/:id", async (req, res) => {
             owner: req.user.id
         }
     };
-    //Comment
-    const updated = {
+
+    const updatedLog = {
         what: food,
         where: location,
         calories: calorieNumber,
@@ -42,6 +69,7 @@ router.put("/update/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err });
     }
+
 });
 
 //* DELETE ***
@@ -64,7 +92,6 @@ router.delete("/delete/:id", async (req, res) => {
         res.status(500).json({ error: err });
     }
 });
-
 
 //* GET ***
 router.get("/mine/:date", async (req, res) => {
@@ -105,5 +132,6 @@ router.get("/mine/:month", async (req, res) => {
 
 
 module.exports = router;
+
 
 

@@ -29,6 +29,9 @@ const foodLog = db.define("log", {
     photo: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    owner: {
+        type: DataTypes.INTEGER
     }
 });
 

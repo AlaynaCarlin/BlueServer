@@ -1,7 +1,7 @@
 const { query } = require('express');
 const Express = require('express');
 const router = Express.Router();
-const { where } = require('sequelize/location');
+// const { where } = require('sequelize/location');
 const { LogModel } = require('../models');
 
 //* PRACTICE ***
@@ -25,7 +25,7 @@ router.put("/update/:id", async (req, res) => {
         }
     };
     //Comment
-    const updatedLog = {
+    const updated = {
         what: food,
         where: location,
         calories: calorieNumber,

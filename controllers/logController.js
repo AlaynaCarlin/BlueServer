@@ -94,17 +94,18 @@ router.put("/update/:id", async (req, res) => {
 // });
 
 //* GET ***
-// router.get("/mine/:date", async (req, res) => {
-//     const { date } = req.params;
-//     try {
-//         const results = await LogModel.findAll({
-//             where: { date: date }
-//         });
-//         res.status(200).json(results);
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
+router.get("/:date", async (req, res) => {
+    const logDate  = req.params.date;
+    try {
+        const results = await LogModel.findAll({
+            date: logDate 
+        });
+        // console.log(results);
+        res.status(200).json(results);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 // router.get("/mine/:week", async (req, res) => {
 //     const { week } = req.params;

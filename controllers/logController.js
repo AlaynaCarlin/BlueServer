@@ -1,8 +1,9 @@
 
 const { query } = require('express');
 const Express = require('express');
+const { formatNamedParameters } = require('sequelize/dist/lib/utils');
 const router = Express.Router();
-// const { where } = require('sequelize/location');
+// const { where } = require('sequelize/where');
 const { LogModel } = require('../models');
 
 //* PRACTICE ***
@@ -28,21 +29,21 @@ router.post("/create", async (req, res) => {
 
         res.status(201).json({
             message: "Log successfully created",
-            message: {NewLog}
+            message: { NewLog }
         })
     } catch (err) {
-            res.status(500).json({
-                message: "Unable to Log Meal",
-                message: {err}
-            });
-        }
+        res.status(500).json({
+            message: "Unable to Log Meal",
+            message: { err }
+        });
     }
+}
 );
 
 // Ben - Update
 router.put("/update/:id", async (req, res) => {
 
-    const {food, location, calorieNumber, mealType, date, photo, feeling} = req.body.log;
+    const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
     const id = req.params.id;
 
     const query = {
@@ -94,13 +95,21 @@ router.put("/update/:id", async (req, res) => {
 // });
 
 //* GET ***
-router.get("/:date", async (req, res) => {
-    const logDate  = req.params.date;
+router.get("/date", async (req, res) => { // :date is dynamic and a big security risk. This creates a route that pulls everything from the database for people to see. Use /date
+    const logDate = req.params.date; 
+    const from = req.params.from; // from is the start date
+    const to = req.params.to; // to is the end date
+    console.log(req, 'req.params');
     try {
-        const results = await LogModel.findAll({
-            date: logDate 
+        const results = LogModel.findAll({
+            where: {
+                date: {
+                    $between: [from, to]    // $between is a sequelize method that is used to find all the dates between the two dates
+                }
+            }
         });
-        // console.log(results);
+
+        console.log(results);
         res.status(200).json(results);
     } catch (err) {
         res.status(500).json({ error: err });
@@ -130,7 +139,6 @@ router.get("/:date", async (req, res) => {
 //         res.status(500).json({ error: err });
 //     }
 // });
-
 
 module.exports = router;
 

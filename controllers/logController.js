@@ -1,4 +1,4 @@
-const Express = require('express');
+const Express = require("express");
 const router = Express.Router();
 // const { where } = require('sequelize/location');
 const { LogModel } = require('../models');
@@ -66,16 +66,11 @@ router.put("/update/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err });
     }
+
 });
 
 //* DELETE ***
 
-
 //* GET ***
 
-
-
 module.exports = router;
-
-
-

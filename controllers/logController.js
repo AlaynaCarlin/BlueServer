@@ -9,37 +9,33 @@ const { LogModel } = require('../models');
 // });
 
 //* POST ***
-router.post("/register", async (req, res) => {
+router.post("/create", async (req, res) => {
 
-    let { what, where, calories, category, date, photo, feeling } = req.body.log;
+    let { what, where, calories, category, date, photo, feelings } = req.body.log;
 
     try {
-        const NewLog = await Log.create({
+        const NewLog = await LogModel.create({
             what,
             where,
             calories,
             category,
             date,
             photo,
-            feeling
+            feelings
         });
 
         res.status(201).json({
             message: "Log successfully created",
-            user: NewLog
+            message: {NewLog}
         })
     } catch (err) {
-        if (err instanceof UniqueConstraintError) {
-            res.status(409).json({
-                message: "Food already listed. Try Updating instead.",
-            });
-        } else {
             res.status(500).json({
                 message: "Unable to Log Meal",
+                message: {err}
             });
         }
     }
-});
+);
 
 // Ben - Update
 router.put("/update/:id", async (req, res) => {

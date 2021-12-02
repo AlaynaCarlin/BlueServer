@@ -3,49 +3,38 @@
 const Express = require('express');
 // const { formatNamedParameters } = require('sequelize/dist/lib/utils');
 const router = Express.Router();
-// const { where } = require('sequelize/where');
-const { LogModel } = require('../models');
-
-//* PRACTICE ***
-// router.get('/practice', (req, res) => {
-//     res.send('Hey, This is the practice route!!')
-// });
+let validateJWT = require("../middleware/validate-jwt");
+const { LogModel } = require("../models");
 
 //* POST ***
 router.post("/create", validateJWT, async (req, res) => {
-
-    let { what, where, calories, category, date, photo, feelings } = req.body.log;
-
+    const { id } = req.user;
+    const { what, where, calories, category, date, photo, feelings } = req.body.log;
+    const NewLog = {
+        what,
+        where,
+        calories,
+        category,
+        date,
+        photo,
+        feelings,
+        owner: id
+    };
     try {
-        const NewLog = await LogModel.create({
-            what,
-            where,
-            calories,
-            category,
-            date,
-            photo,
-            feelings
-        });
-
-        res.status(201).json({
-            message: "Log successfully created",
-            message: { NewLog }
-        })
+        const mealLog = await LogModel.create(NewLog);
+        res.status(200).json(mealLog);
     } catch (err) {
-        res.status(500).json({
-            message: "Unable to Log Meal",
-            message: { err }
-        });
+        res.status(500).json({ error: err });
     }
 }
 );
 
 // Ben - Update
 router.put("/update/:id", validateJWT, async (req, res) => {
-
     const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
     const logId = req.params.id;
-    const {id} = req.user;
+    const { id } = req.user;
+    // console.log(req.params, 'req.params');
 
     const query = {
         where: {
@@ -62,11 +51,12 @@ router.put("/update/:id", validateJWT, async (req, res) => {
         date: date,
         photo: photo,
         feelings: feeling,
+        // owner: id
 
     };
 
     try {
-        const update = await logModel.update(updatedLog, query);
+        const update = await LogModel.update(updatedLog, query);
         res.status(200).json(update);
     } catch (err) {
         res.status(500).json({ error: err });
@@ -96,50 +86,19 @@ router.put("/update/:id", validateJWT, async (req, res) => {
 // });
 
 //* GET ***
-router.get("/date", async (req, res) => { // :date is dynamic and a big security risk. This creates a route that pulls everything from the database for people to see. Use /date
-    const logDate = req.params.date; 
-    const from = req.params.from; // from is the start date
-    const to = req.params.to; // to is the end date
-    console.log(req, 'req.params');
+router.get('/mine', validateJWT, async (req, res) => {
+    const { id } = req.user;
     try {
-        const results = LogModel.findAll({
+        const logs = await LogModel.findAll({
             where: {
-                date: {
-                    $between: [from, to]    // $between is a sequelize method that is used to find all the dates between the two dates
-                }
+                owner: id
             }
         });
-
-        console.log(results);
-        res.status(200).json(results);
+        res.status(200).json(logs);
     } catch (err) {
         res.status(500).json({ error: err });
     }
-});
-
-// router.get("/mine/:week", async (req, res) => {
-//     const { week } = req.params;
-//     try {
-//         const results = await LogModel.findAll({
-//             where: { date: week }
-//         });
-//         res.status(200).json(results);
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
-
-// router.get("/mine/:month", async (req, res) => {
-//     const { month } = req.params;
-//     try {
-//         const results = await LogModel.findAll({
-//             where: { date: month }
-//         });
-//         res.status(200).json(results);
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
+})
 
 module.exports = router;
 

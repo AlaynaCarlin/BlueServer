@@ -103,6 +103,7 @@ router.get('/mine', validateJWT, async (req, res) => {
             }
         });
         res.status(200).json(logs);
+            message `${logs} Logs successfully retrieved!`
     } catch (err) {
         res.status(500).json({ error: err });
     }

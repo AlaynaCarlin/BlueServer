@@ -76,27 +76,27 @@ router.put("/update/:id", validateJWT, async (req, res) => {
 
 //* DELETE ***
 // ! still needs validate
-// router.delete("/delete/:id", async (req, res) => {
-//     const ownerId = req.user.id;
-//     const logId = req.params.id;
+router.delete("/delete/:id", validateJWT, async (req, res) => {
+    const ownerId = req.user.id;
+    const logId = req.params.id;
 
-//     try {
-//         const query = {
-//             where:{
-//                 id: logId,
-//                 owner: ownerId
-//             }
-//         };
+    try {
+        const query = {
+            where:{
+                id: logId,
+                owner: ownerId
+            }
+        };
 
-//         await LogModel.destroy(query);
-//         res.status(200).json({ message: 'Log deleted' });
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
+        await LogModel.destroy(query);
+        res.status(200).json({ message: 'Log deleted' });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 //* GET ***
-router.get('/mine',validateJWT, async (req, res) => {
+router.get('/mine', validateJWT, async (req, res) => {
     const { id } = req.user;
     try{
         const logs = await LogModel.findAll({

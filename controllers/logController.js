@@ -29,39 +29,63 @@ router.post("/create", validateJWT, async (req, res) => {
 
 // Ben - Update
 router.put("/update/:id", validateJWT, async (req, res) => {
-    const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
-    const logId = req.params.id;
     const { id } = req.user;
-    console.log(id, "Im Here")
-    console.log(req.body.log);
-
-    const query = {
-        where: {
-            id: logId,
-            owner: id
-        }
-    };
-
-    const updatedLog = {
-        what: food,
-        where: location,
-        calories: calorieNumber,
-        category: mealType,
-        // date: date,
-        photo: photo,
-        feelings: feeling,
+    const { what, where, calories, category, date, photo, feelings } = req.body.log;
+    const NewLog = {
+        what,
+        where,
+        calories,
+        category,
+        date,
+        photo,
+        feelings,
         owner: id
-
     };
-
     try {
-        const update = await LogModel.update(updatedLog, query);
-        res.status(200).json(update);
+        const updatedLog = await LogModel.findByIdAndUpdate(req.params.id, NewLog, { new: true }); // { new: true } returns the updated document, not the original
+        res.status(200).json(updatedLog);
+        message = "Log updated successfully";
     } catch (err) {
         res.status(500).json({ error: err });
+        message = "Error updating log";
     }
+}
+);
 
-});
+// router.put("/update/:id", validateJWT, async (req, res) => {
+//     const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
+//     const logId = req.params.id;
+//     const { id } = req.user;
+//     console.log(id, "Im Here")
+//     console.log(req.body.log);
+
+//     const query = {
+//         where: {
+//             id: logId,
+//             owner: id
+//         }
+//     };
+
+//     const updatedLog = {
+//         what: food,
+//         where: location,
+//         calories: calorieNumber,
+//         category: mealType,
+//         // date: date,
+//         photo: photo,
+//         feelings: feeling,
+//         owner: id
+
+//     };
+
+//     try {
+//         const update = await LogModel.update(updatedLog, query);
+//         res.status(200).json(update);
+//     } catch (err) {
+//         res.status(500).json({ error: err });
+//     }
+
+// });
 
 //* DELETE ***
 // ! still needs validate

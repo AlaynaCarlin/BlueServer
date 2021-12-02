@@ -12,6 +12,7 @@ router.get("/practice", validateJWT, (req, res) => {
 //* POST ***
 router.post("/create", validateJWT, async (req, res) => {
     const { id } = req.user;
+    
     const { what, where, calories, category, date, photo, feelings } = req.body.log;
     const NewLog = {
             what,
@@ -34,9 +35,10 @@ router.post("/create", validateJWT, async (req, res) => {
 
 // Ben - Update
 router.put("/update/:id", validateJWT, async (req, res) => {
-    const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
+    const { what, where, calories, category, date, photo, feelings } = req.body.log;// **these need to match our request**
     const logId = req.params.id;
     const {id} = req.user;
+    // console.log(id);
     // console.log(req.params, 'req.params');
 
     const query = {
@@ -47,20 +49,25 @@ router.put("/update/:id", validateJWT, async (req, res) => {
     };
 
     const updatedLog = {
-        what: food,
-        where: location,
-        calories: calorieNumber,
-        category: mealType,
+        what: what,
+        where: where,
+        calories: calories,
+        category: category,
         date: date,
         photo: photo,
-        feelings: feeling,
+        feelings: feelings,
         // owner: id
 
     };
+    console.log(updatedLog);
 
     try {
         const update = await LogModel.update(updatedLog, query);
-        res.status(200).json(update);
+        res.status(200).json({
+            message: `${update} Logs successfully updated!`,
+            update: updatedLog,
+            query: query
+        });
     } catch (err) {
         res.status(500).json({ error: err });
     }

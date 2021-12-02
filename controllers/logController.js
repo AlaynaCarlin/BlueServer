@@ -1,7 +1,7 @@
 
-const { query } = require('express');
+// const { query } = require('express');
 const Express = require('express');
-const { formatNamedParameters } = require('sequelize/dist/lib/utils');
+// const { formatNamedParameters } = require('sequelize/dist/lib/utils');
 const router = Express.Router();
 // const { where } = require('sequelize/where');
 const { LogModel } = require('../models');
@@ -12,7 +12,7 @@ const { LogModel } = require('../models');
 // });
 
 //* POST ***
-router.post("/create", async (req, res) => {
+router.post("/create", validateJWT, async (req, res) => {
 
     let { what, where, calories, category, date, photo, feelings } = req.body.log;
 
@@ -41,15 +41,16 @@ router.post("/create", async (req, res) => {
 );
 
 // Ben - Update
-router.put("/update/:id", async (req, res) => {
+router.put("/update/:id", validateJWT, async (req, res) => {
 
     const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
-    const id = req.params.id;
+    const logId = req.params.id;
+    const {id} = req.user;
 
     const query = {
         where: {
-            id: id,
-            owner: req.user.id
+            id: logId,
+            owner: id
         }
     };
 
@@ -65,7 +66,7 @@ router.put("/update/:id", async (req, res) => {
     };
 
     try {
-        const update = await log.update(updatedLog, query);
+        const update = await logModel.update(updatedLog, query);
         res.status(200).json(update);
     } catch (err) {
         res.status(500).json({ error: err });

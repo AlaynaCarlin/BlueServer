@@ -4,13 +4,14 @@ const Express = require('express');
 // const { formatNamedParameters } = require('sequelize/dist/lib/utils');
 const validateJWT = require('../../ElevenFiftyProjects/myProjects/WorkoutLog/server/middleware/validate-jwt');
 const router = Express.Router();
-// const { where } = require('sequelize/where');
-const { LogModel } = require('../models');
+let validateJWT = require("../middleware/validate-jwt");
+const { LogModel } = require("../models");
+
 
 //* PRACTICE ***
-// router.get('/practice', (req, res) => {
-//     res.send('Hey, This is the practice route!!')
-// });
+router.get("/practice", validateJWT, (req, res) => {
+  res.send("Hey, This is the practice route!!");
+});
 
 //* POST ***
 router.post("/create", validateJWT, async (req, res) => {

@@ -11,7 +11,7 @@ const foodLog = db.define("log", {
         allowNull: false
     },
     date: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     feelings: {
@@ -30,9 +30,9 @@ const foodLog = db.define("log", {
         type: DataTypes.STRING,
         allowNull: false
     },
-    // owner: {
-    //     type: DataTypes.INTEGER
-    // }
+    owner: {
+        type: DataTypes.INTEGER
+    }
 });
 
 module.exports = foodLog;

@@ -1,7 +1,8 @@
 
-const { query } = require('express');
+// const { query } = require('express');
 const Express = require('express');
-const { formatNamedParameters } = require('sequelize/dist/lib/utils');
+// const { formatNamedParameters } = require('sequelize/dist/lib/utils');
+const validateJWT = require('../../ElevenFiftyProjects/myProjects/WorkoutLog/server/middleware/validate-jwt');
 const router = Express.Router();
 // const { where } = require('sequelize/where');
 const { LogModel } = require('../models');
@@ -12,44 +13,39 @@ const { LogModel } = require('../models');
 // });
 
 //* POST ***
-router.post("/create", async (req, res) => {
-
-    let { what, where, calories, category, date, photo, feelings } = req.body.log;
-
-    try {
-        const NewLog = await LogModel.create({
+router.post("/create", validateJWT, async (req, res) => {
+    const { id } = req.user;
+    const { what, where, calories, category, date, photo, feelings } = req.body.log;
+    const NewLog = {
             what,
             where,
             calories,
             category,
             date,
             photo,
-            feelings
-        });
-
-        res.status(201).json({
-            message: "Log successfully created",
-            message: { NewLog }
-        })
+            feelings,
+            owner: id
+        };
+    try {
+       const mealLog = await LogModel.create(NewLog);
+       res.status(200).json(mealLog);
     } catch (err) {
-        res.status(500).json({
-            message: "Unable to Log Meal",
-            message: { err }
-        });
+        res.status(500).json({ error: err });
     }
 }
 );
 
 // Ben - Update
-router.put("/update/:id", async (req, res) => {
-
+router.put("/update/:id", validateJWT, async (req, res) => {
     const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
-    const id = req.params.id;
+    const logId = req.params.id;
+    const {id} = req.user;
+    // console.log(req.params, 'req.params');
 
     const query = {
         where: {
-            id: id,
-            owner: req.user.id
+            id: logId,
+            owner: id
         }
     };
 
@@ -61,11 +57,12 @@ router.put("/update/:id", async (req, res) => {
         date: date,
         photo: photo,
         feelings: feeling,
+        // owner: id
 
     };
 
     try {
-        const update = await log.update(updatedLog, query);
+        const update = await LogModel.update(updatedLog, query);
         res.status(200).json(update);
     } catch (err) {
         res.status(500).json({ error: err });
@@ -95,50 +92,19 @@ router.put("/update/:id", async (req, res) => {
 // });
 
 //* GET ***
-router.get("/date", async (req, res) => { // :date is dynamic and a big security risk. This creates a route that pulls everything from the database for people to see. Use /date
-    const logDate = req.params.date; 
-    const from = req.params.from; // from is the start date
-    const to = req.params.to; // to is the end date
-    console.log(req, 'req.params');
-    try {
-        const results = LogModel.findAll({
+router.get('/mine',validateJWT, async (req, res) => {
+    const { id } = req.user;
+    try{
+        const logs = await LogModel.findAll({
             where: {
-                date: {
-                    $between: [from, to]    // $between is a sequelize method that is used to find all the dates between the two dates
-                }
+                owner: id
             }
         });
-
-        console.log(results);
-        res.status(200).json(results);
+        res.status(200).json(logs);
     } catch (err) {
         res.status(500).json({ error: err });
     }
-});
-
-// router.get("/mine/:week", async (req, res) => {
-//     const { week } = req.params;
-//     try {
-//         const results = await LogModel.findAll({
-//             where: { date: week }
-//         });
-//         res.status(200).json(results);
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
-
-// router.get("/mine/:month", async (req, res) => {
-//     const { month } = req.params;
-//     try {
-//         const results = await LogModel.findAll({
-//             where: { date: month }
-//         });
-//         res.status(200).json(results);
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
+})
 
 module.exports = router;
 

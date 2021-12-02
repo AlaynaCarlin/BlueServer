@@ -1,8 +1,13 @@
 const Express = require('express');
-const validateJWT = require('../middleware/validate-jwt');
 const router = Express.Router();
-const { LogModel } = require('../models');
+let validateJWT = require("../middleware/validate-jwt");
+const { LogModel } = require("../models");
 
+
+//* PRACTICE ***
+router.get("/practice", validateJWT, (req, res) => {
+  res.send("Hey, This is the practice route!!");
+});
 
 //* POST ***
 router.post("/create", validateJWT, async (req, res) => {

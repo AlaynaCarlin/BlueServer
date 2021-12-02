@@ -1,10 +1,8 @@
-
-// const { query } = require('express');
 const Express = require('express');
-// const { formatNamedParameters } = require('sequelize/dist/lib/utils');
 const router = Express.Router();
 let validateJWT = require("../middleware/validate-jwt");
 const { LogModel } = require("../models");
+
 
 //* POST ***
 router.post("/create", validateJWT, async (req, res) => {
@@ -34,7 +32,8 @@ router.put("/update/:id", validateJWT, async (req, res) => {
     const { food, location, calorieNumber, mealType, date, photo, feeling } = req.body.log;
     const logId = req.params.id;
     const { id } = req.user;
-    // console.log(req.params, 'req.params');
+    console.log(id, "Im Here")
+    console.log(req.body.log);
 
     const query = {
         where: {
@@ -48,10 +47,10 @@ router.put("/update/:id", validateJWT, async (req, res) => {
         where: location,
         calories: calorieNumber,
         category: mealType,
-        date: date,
+        // date: date,
         photo: photo,
         feelings: feeling,
-        // owner: id
+        owner: id
 
     };
 

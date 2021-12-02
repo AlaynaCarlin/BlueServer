@@ -30,9 +30,9 @@ const foodLog = db.define("log", {
         type: DataTypes.STRING,
         allowNull: false
     },
-    owner: {
-        type: DataTypes.INTEGER
-    }
+    // owner: {
+    //     type: DataTypes.INTEGER
+    // }
 });
 
 module.exports = foodLog;

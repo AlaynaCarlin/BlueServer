@@ -20,6 +20,7 @@ router.post("/register", async (req, res) => {
       sessionToken: token,
     });
   } catch (err) {
+      console.log(err);
     if (err instanceof UniqueConstraintError) {
       res.status(409).json({
         message: "Email already in use",
@@ -27,6 +28,7 @@ router.post("/register", async (req, res) => {
     } else {
       res.status(500).json({
         message: "Failed to register user",
+        
       });
     }
   }

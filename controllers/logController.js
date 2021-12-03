@@ -3,12 +3,6 @@ const router = Express.Router();
 let validateJWT = require("../middleware/validate-jwt");
 const { LogModel } = require("../models");
 
-
-//* PRACTICE ***
-router.get("/practice", validateJWT, (req, res) => {
-  res.send("Hey, This is the practice route!!");
-});
-
 //* POST ***
 router.post("/create", validateJWT, async (req, res) => {
     const { id } = req.user;

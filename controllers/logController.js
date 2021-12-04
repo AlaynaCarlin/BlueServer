@@ -19,8 +19,12 @@ router.post("/create", validateJWT, async (req, res) => {
         owner: id
     };
     try {
-        const mealLog = await LogModel.create(NewLog);
-        res.status(200).json(mealLog);
+
+       const mealLog = await LogModel.create(NewLog);
+       res.status(200).json({
+           message: "Log Created",
+           log: mealLog,
+       })
     } catch (err) {
         res.status(500).json({ error: err });
     }

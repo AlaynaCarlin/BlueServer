@@ -3,10 +3,6 @@ const router = Express.Router();
 let validateJWT = require("../middleware/validate-jwt");
 const { LogModel } = require("../models");
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 70c4fea3d7ce267eff0f8d42fa68e42d42d01e3b
 //* POST ***
 router.post("/create", validateJWT, async (req, res) => {
     const { id } = req.user;
@@ -100,7 +96,7 @@ router.delete("/delete/:id", validateJWT, async (req, res) => {
 router.get('/mine', validateJWT, async (req, res) => {
     const { id } = req.user;
     try {
-        const logs = await LogModel.findOne({
+        const logs = await LogModel.findAll({
             where: {
                 owner: id
             }

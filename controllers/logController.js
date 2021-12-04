@@ -97,7 +97,7 @@ router.delete("/delete/:id", validateJWT, async (req, res) => {
 router.get('/mine', validateJWT, async (req, res) => {
     const { id } = req.user;
     try {
-        const logs = await LogModel.findAll({
+        const logs = await LogModel.findOne({
             where: {
                 owner: id
             }

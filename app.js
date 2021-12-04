@@ -12,7 +12,7 @@ app.use('/user', controllers.userController);
 
 dbConnection.authenticate()
     .then(() => dbConnection.sync(
-       
+
     ))
     .then(() => {
         app.listen(3000, () => {

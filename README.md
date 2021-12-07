@@ -50,12 +50,12 @@ Team Member #3  [Renee Godby]
 
 Assigned Tasks
 Sign-Up/POST
-Completion Date: 12/03/2021
-[11/30/21]: [created user controller]
+Completion Date: 12/01/2021
+[11/29/21]: [created user controller]
 [12/01/21]: [created sign-up function]
 [12/03/2021]: [added authentication, session token and password encryption]
 
 Log-In/POST
-Completion Date: 12/03/2021
+Completion Date: 12/01/2021
 [11/30/21]: [created Log-in function]
 [12/03/2021]: [added authentication, session token and password encryption]

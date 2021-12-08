@@ -8,7 +8,7 @@ Technology Used:
 
 Team Member #1  [NAME]
 
-               https://github.com/MzArlowe, https://www.linkedin.com/in/ben-marlowe/, https://github.com/MzArlowe/mzarlowe.github.io
+               https://github.com/MzArlowe | https://www.linkedin.com/in/ben-marlowe/ | https://github.com/MzArlowe/mzarlowe.github.io
 
 Assigned Tasks
 
@@ -52,9 +52,7 @@ Completion Date: WIP / [completion date]
 
 Team Member #3  [Renee Godby]
 
-              GitHub: https://github.com/reneegodby
-              LinkedIn: www.linkedin.com/in/renee-godby
-              Portfolio:https://reneegodby.github.io/
+              GitHub: https://github.com/reneegodby | LinkedIn: www.linkedin.com/in/renee-godby | Portfolio:https://reneegodby.github.io/
 
 • Assigned Tasks
 

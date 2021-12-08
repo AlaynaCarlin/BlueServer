@@ -16,21 +16,12 @@ Team Member #1: Ben Marlowe
              
 •	Assigned Tasks
 
-o	Endpoint 1 Create/Log
+o	Endpoint 1 Create | Endpoint 2 Log
 
 =>	Completion Date: 12/01/2021
 -	[11/29/2021]: DB.js – Merged Pull Request
 -	[11/30/2021]: APP.js - Pulled and Merged Completed Code
 -	[12/01/2021]: LogController – Finished and Pushed Final Code
-
-o	Endpoint 2 Update/Delete
-
-=>	Completion Date: 12/07/2021
--	[12/03/2021]: UpdateLog – Uploaded rough code
--	[12/06/2021]: UpdateLog/LogIndex - Worked on Code for Update and got it partially working
--	[12/07/2021]: Update/Delete – functioning delete and update
-
- 
 
 Team Member #2  [NAME]
 

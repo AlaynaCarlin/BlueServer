@@ -56,14 +56,17 @@ Team Member #3  [Renee Godby]
               LinkedIn: www.linkedin.com/in/renee-godby
               Portfolio:https://reneegodby.github.io/
 
-Assigned Tasks
-Sign-Up/POST
-Completion Date: 12/01/2021
-[11/29/21]: [created user controller]
-[12/01/21]: [created sign-up function]
-[12/03/2021]: [added authentication, session token and password encryption]
+• Assigned Tasks
 
-Log-In/POST
-Completion Date: 12/01/2021
-[11/30/21]: [created Log-in function]
-[12/03/2021]: [added authentication, session token and password encryption]
+o Sign-Up/POST
+
+=> Completion Date: 12/01/2021
+- [11/29/21]: [created user controller]
+- [12/01/21]: [created sign-up function]
+- [12/03/2021]: [added authentication, session token and password encryption]
+
+o Log-In/POST
+
+ => Completion Date: 12/01/2021
+- [11/30/21]: [created Log-in function]
+- [12/03/2021]: [added authentication, session token and password encryption]

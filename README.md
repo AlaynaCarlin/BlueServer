@@ -22,6 +22,7 @@ o	Endpoint 1 Create | Endpoint 2 Log
 -	[11/29/2021]: DB.js – Merged Pull Request
 -	[11/30/2021]: APP.js - Pulled and Merged Completed Code
 -	[12/01/2021]: LogController – Finished and Pushed Final Code
+-	[12/07/2021]: Deployed Successfully on Heroku with the Server
 
 Team Member #2  [Alayna Carlin]
 
@@ -38,6 +39,7 @@ DELETE
 Completion Date: WIP / 12/1/2021
 [12/1/2021]: created bones for delete
 [12/1/2021]: Finished delete
+[12/07/2021]: Deployed Successfully on Heroku with the Server
  
 
 Team Member #3  [Renee Godby]
@@ -58,3 +60,4 @@ o Log-In/POST
  => Completion Date: 12/01/2021
 - [11/30/21]: [created Log-in function]
 - [12/03/2021]: [added authentication, session token and password encryption]
+-	[12/07/2021]: Deployed Successfully on Heroku with the Server

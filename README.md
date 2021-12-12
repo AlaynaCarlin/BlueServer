@@ -37,7 +37,9 @@ o Endpoint GET
 - [11/30/2021]: Created logController
 - [11/30/2021]: Constructed a get logs by user endpoint
 Ex: 11/29: Navbar.jsx – build out routing and styling.
-DELETE
+
+o DELETE
+
 => Completion Date: WIP / 12/1/2021
 - [12/1/2021]: created bones for delete
 - [12/1/2021]: Finished delete

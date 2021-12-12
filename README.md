@@ -28,18 +28,20 @@ Team Member #2  [Alayna Carlin]
 
               https://github.com/AlaynaCarlin, https://www.linkedin.com/in/alayna-carlin-865326221/, https://github.com/AlaynaCarlin/AlaynaCarlin.github.io.git
 
-Assigned Tasks
-Endpoint GET
-Completion Date: 12/1/2021
-[11/29/2021]: Created log Model
-[11/30/2021]: Created logController
-[11/30/2021]: Constructed a get logs by user endpoint
+• Assigned Tasks
+
+o Endpoint GET
+
+=> Completion Date: 12/1/2021
+- [11/29/2021]: Created log Model
+- [11/30/2021]: Created logController
+- [11/30/2021]: Constructed a get logs by user endpoint
 Ex: 11/29: Navbar.jsx – build out routing and styling.
 DELETE
-Completion Date: WIP / 12/1/2021
-[12/1/2021]: created bones for delete
-[12/1/2021]: Finished delete
-[12/07/2021]: Deployed Successfully on Heroku with the Server
+=> Completion Date: WIP / 12/1/2021
+- [12/1/2021]: created bones for delete
+- [12/1/2021]: Finished delete
+- [12/07/2021]: Deployed Successfully on Heroku with the Server
  
 
 Team Member #3  [Renee Godby]
